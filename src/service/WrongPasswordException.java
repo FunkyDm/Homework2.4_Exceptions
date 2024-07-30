@@ -1,4 +1,4 @@
-package exceptions;
+package service;
 
 public class WrongPasswordException extends RuntimeException {
     public WrongPasswordException(String password) {
