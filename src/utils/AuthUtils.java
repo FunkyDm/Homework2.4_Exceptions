@@ -19,12 +19,21 @@ public class AuthUtils {
         if (checkValuePattern(password)) {
             throw new WrongPasswordException(password);
         }
-        if (!password.equals(confirmPassword)) {
+        if (confirmPassword == null) {
+            throw new WrongPasswordException(password, confirmPassword);
+        } else if(!password.equals(confirmPassword)){
             throw new WrongPasswordException(password, confirmPassword);
         }
     }
 
     public static boolean checkValuePattern(String value) {
-        return !PATTERN.matcher(value).matches();
+        if(value == null){
+            return false;
+        }
+        else if(!PATTERN.matcher(value).matches()){
+            return true;
+        }else {
+            return false;
+        }
     }
 }
