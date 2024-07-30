@@ -1,14 +1,14 @@
 package utils;
 
-import service.WrongLoginException;
-import service.WrongPasswordException;
+import exception.WrongLoginException;
+import exception.WrongPasswordException;
 
 import java.util.regex.Pattern;
 
 public class AuthUtils {
     private static final Pattern PATTERN = Pattern.compile("[a-zA-Z0-9_]{1,20}");
 
-    private AuthUtils(){
+    private AuthUtils() {
 
     }
 
@@ -19,21 +19,14 @@ public class AuthUtils {
         if (checkValuePattern(password)) {
             throw new WrongPasswordException(password);
         }
-        if (confirmPassword == null) {
-            throw new WrongPasswordException(password, confirmPassword);
-        } else if(!password.equals(confirmPassword)){
+        if (!password.equals(confirmPassword)) {
             throw new WrongPasswordException(password, confirmPassword);
         }
     }
 
     public static boolean checkValuePattern(String value) {
-        if(value == null){
-            return false;
-        }
-        else if(!PATTERN.matcher(value).matches()){
+        if (value == null) {
             return true;
-        }else {
-            return false;
-        }
+        } else return !PATTERN.matcher(value).matches();
     }
 }
