@@ -1,3 +1,5 @@
+package service;
+
 import exception.WrongLoginException;
 import exception.WrongPasswordException;
 import utils.AuthUtils;
